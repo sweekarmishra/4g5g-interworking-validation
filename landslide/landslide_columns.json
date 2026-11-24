@@ -1,0 +1,6 @@
+{
+  "_note": "Map the tool's fields to the column headers in YOUR Landslide export. The values below match the synthetic sample file only; they are NOT guaranteed Landslide names.",
+  "attempts": "Handover Attempts",
+  "successes": "Handover Successes",
+  "avg_time_ms": "Avg Interruption Time (ms)"
+}

@@ -1,0 +1,3269 @@
+[
+  {
+    "id": "TC-BASE-01",
+    "title": "4G attach creates default bearer (QCI 9) and IP",
+    "ref": "TS 23.401 5.3.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 90.9,
+    "metrics": null,
+    "calls": 2,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/epc/attach",
+        "request": {
+          "supi": "imsi-001010000000001",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000001",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000001-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.3",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            }
+          ]
+        },
+        "ms": 87.4
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000001",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000001",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000001-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.3",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            }
+          ]
+        },
+        "ms": 2.7
+      }
+    ]
+  },
+  {
+    "id": "TC-BASE-02",
+    "title": "5G registration creates default PDU session (5QI 9) and IP",
+    "ref": "TS 23.502 4.2.2.2.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 3.6,
+    "metrics": null,
+    "calls": 2,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000002",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000002",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000002-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.4",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.9
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000002",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000002",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000002-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.4",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.4
+      }
+    ]
+  },
+  {
+    "id": "TC-BASE-03",
+    "title": "Barred subscriber is rejected on 4G attach",
+    "ref": "TS 23.401 5.3.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 2.8,
+    "metrics": null,
+    "calls": 1,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/epc/attach",
+        "request": {
+          "supi": "imsi-001019999999999",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 403,
+        "response": {
+          "cause": "AUTHENTICATION_FAILURE"
+        },
+        "ms": 2.7
+      }
+    ]
+  },
+  {
+    "id": "TC-IDL-01",
+    "title": "5GS to EPS idle move (TAU) keeps IP and sessions",
+    "ref": "TS 23.502 4.11.1.3",
+    "status": "PASS",
+    "message": "",
+    "ms": 8.1,
+    "metrics": null,
+    "calls": 5,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000003",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000003",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000003-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.5",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.7
+      },
+      {
+        "method": "POST",
+        "path": "/5gc/pdu-session",
+        "request": {
+          "supi": "imsi-001010000000003",
+          "pduSessionId": 2,
+          "dnn": "ims",
+          "sst": 1
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000003",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000003-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.5",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.6",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.5
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000003",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000003",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000003-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.5",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.6",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.5
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/idle",
+        "request": {
+          "supi": "imsi-001010000000003",
+          "targetRat": "LTE"
+        },
+        "status": 200,
+        "response": {
+          "result": "TAU_SUCCESS",
+          "from": "5GC",
+          "to": "EPC",
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000003",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000003-2",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.5",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.6",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.5
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000003",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000003",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000003-2",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.5",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": null,
+              "ip": "10.50.0.6",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 6
+            }
+          ]
+        },
+        "ms": 1.3
+      }
+    ]
+  },
+  {
+    "id": "TC-IDL-02",
+    "title": "EPS to 5GS idle move (mobility registration) keeps IP",
+    "ref": "TS 23.502 4.11.1.3",
+    "status": "PASS",
+    "message": "",
+    "ms": 5.6,
+    "metrics": null,
+    "calls": 4,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/epc/attach",
+        "request": {
+          "supi": "imsi-001010000000004",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000004",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000004-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.7",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            }
+          ]
+        },
+        "ms": 1.6
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000004",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000004",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000004-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.7",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            }
+          ]
+        },
+        "ms": 1.1
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/idle",
+        "request": {
+          "supi": "imsi-001010000000004",
+          "targetRat": "NR"
+        },
+        "status": 200,
+        "response": {
+          "result": "MOBILITY_REGISTRATION_SUCCESS",
+          "from": "EPC",
+          "to": "5GC",
+          "transferred": [
+            1
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000004",
+            "core": "5GC",
+            "rat": "NR",
+            "guti": "5g-guti-000004-2",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": 1,
+                "ip": "10.50.0.7",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000004",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000004",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000004-2",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.7",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.2
+      }
+    ]
+  },
+  {
+    "id": "TC-IDL-03",
+    "title": "Idle move for an unknown UE returns 404",
+    "ref": "TS 23.502 4.11.1.3",
+    "status": "PASS",
+    "message": "",
+    "ms": 1.3,
+    "metrics": null,
+    "calls": 1,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/mobility/idle",
+        "request": {
+          "supi": "imsi-001010000000005",
+          "targetRat": "LTE"
+        },
+        "status": 404,
+        "response": {
+          "cause": "UE_NOT_FOUND"
+        },
+        "ms": 1.3
+      }
+    ]
+  },
+  {
+    "id": "TC-IDL-04",
+    "title": "Slice-specific session is released when moving to EPS",
+    "ref": "TS 23.502 4.11.1.3",
+    "status": "PASS",
+    "message": "",
+    "ms": 5.8,
+    "metrics": null,
+    "calls": 4,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000006",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000006",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000006-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.8",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.5
+      },
+      {
+        "method": "POST",
+        "path": "/5gc/pdu-session",
+        "request": {
+          "supi": "imsi-001010000000006",
+          "pduSessionId": 3,
+          "dnn": "internet",
+          "sst": 2
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000006",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000006-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.8",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "dnn": "internet",
+              "sst": 2,
+              "ip": "10.50.0.9",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/idle",
+        "request": {
+          "supi": "imsi-001010000000006",
+          "targetRat": "LTE"
+        },
+        "status": 200,
+        "response": {
+          "result": "TAU_SUCCESS",
+          "from": "5GC",
+          "to": "EPC",
+          "transferred": [
+            1
+          ],
+          "released": [
+            3
+          ],
+          "ue": {
+            "supi": "imsi-001010000000006",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000006-2",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.8",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              }
+            ]
+          }
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000006",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000006",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000006-2",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.8",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            }
+          ]
+        },
+        "ms": 1.3
+      }
+    ]
+  },
+  {
+    "id": "TC-HO-01",
+    "title": "5GS to EPS handover preserves IP and maps 5QI 9 to QCI 9",
+    "ref": "TS 23.502 4.11.1.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 5.8,
+    "metrics": null,
+    "calls": 4,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000007",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000007",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000007-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.10",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000007",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000007",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000007-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.10",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000007",
+          "targetRat": "LTE"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "5GC",
+          "to": "EPC",
+          "interruptionMs": 51,
+          "transferred": [
+            1
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000007",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000007-2",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.10",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              }
+            ]
+          }
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000007",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000007",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000007-2",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.10",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            }
+          ]
+        },
+        "ms": 1.2
+      }
+    ]
+  },
+  {
+    "id": "TC-HO-02",
+    "title": "EPS to 5GS handover preserves IP and maps QCI 9 to 5QI 9",
+    "ref": "TS 23.502 4.11.1.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 5.4,
+    "metrics": null,
+    "calls": 4,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/epc/attach",
+        "request": {
+          "supi": "imsi-001010000000008",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000008",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000008-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.11",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            }
+          ]
+        },
+        "ms": 1.6
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000008",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000008",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000008-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.11",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            }
+          ]
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000008",
+          "targetRat": "NR"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "EPC",
+          "to": "5GC",
+          "interruptionMs": 46,
+          "transferred": [
+            1
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000008",
+            "core": "5GC",
+            "rat": "NR",
+            "guti": "5g-guti-000008-2",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": 1,
+                "ip": "10.50.0.11",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "ms": 1.2
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000008",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000008",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000008-2",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.11",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.0
+      }
+    ]
+  },
+  {
+    "id": "TC-HO-03",
+    "title": "IMS session keeps its QoS (5QI 5 <-> QCI 5) across handover",
+    "ref": "TS 23.501 5.17.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 7.0,
+    "metrics": null,
+    "calls": 6,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000009",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000009",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000009-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.12",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.0
+      },
+      {
+        "method": "POST",
+        "path": "/5gc/pdu-session",
+        "request": {
+          "supi": "imsi-001010000000009",
+          "pduSessionId": 2,
+          "dnn": "ims",
+          "sst": 1
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000009",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000009-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.12",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.13",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.1
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000009",
+          "targetRat": "LTE"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "5GC",
+          "to": "EPC",
+          "interruptionMs": 57,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000009",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000009-2",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.12",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.13",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.1
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000009",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000009",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000009-2",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.12",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": null,
+              "ip": "10.50.0.13",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 6
+            }
+          ]
+        },
+        "ms": 1.2
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000009",
+          "targetRat": "NR"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "EPC",
+          "to": "5GC",
+          "interruptionMs": 52,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000009",
+            "core": "5GC",
+            "rat": "NR",
+            "guti": "5g-guti-000009-3",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": 1,
+                "ip": "10.50.0.12",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": 1,
+                "ip": "10.50.0.13",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "ms": 1.0
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000009",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000009",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000009-3",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.12",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.13",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.1
+      }
+    ]
+  },
+  {
+    "id": "TC-HO-04",
+    "title": "Handover transfers internet and IMS sessions, releases slice session",
+    "ref": "TS 23.502 4.11.1.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 7.1,
+    "metrics": null,
+    "calls": 4,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000010",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000010",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000010-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.14",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "POST",
+        "path": "/5gc/pdu-session",
+        "request": {
+          "supi": "imsi-001010000000010",
+          "pduSessionId": 2,
+          "dnn": "ims",
+          "sst": 1
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000010",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000010-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.14",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.15",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "POST",
+        "path": "/5gc/pdu-session",
+        "request": {
+          "supi": "imsi-001010000000010",
+          "pduSessionId": 3,
+          "dnn": "internet",
+          "sst": 2
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000010",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000010-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.14",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.15",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "dnn": "internet",
+              "sst": 2,
+              "ip": "10.50.0.16",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000010",
+          "targetRat": "LTE"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "5GC",
+          "to": "EPC",
+          "interruptionMs": 57,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [
+            3
+          ],
+          "ue": {
+            "supi": "imsi-001010000000010",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000010-2",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.14",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.15",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 2.6
+      }
+    ]
+  },
+  {
+    "id": "TC-HO-05",
+    "title": "Handover to the current RAT is rejected (409)",
+    "ref": "TS 23.502 4.11.1.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 2.9,
+    "metrics": null,
+    "calls": 2,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000011",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000011",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000011-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.17",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000011",
+          "targetRat": "NR"
+        },
+        "status": 409,
+        "response": {
+          "cause": "ALREADY_ON_TARGET_RAT"
+        },
+        "ms": 1.3
+      }
+    ]
+  },
+  {
+    "id": "TC-HO-06",
+    "title": "Handover for an unknown UE returns 404",
+    "ref": "TS 23.502 4.11.1.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 1.2,
+    "metrics": null,
+    "calls": 1,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000012",
+          "targetRat": "LTE"
+        },
+        "status": 404,
+        "response": {
+          "cause": "UE_NOT_FOUND"
+        },
+        "ms": 1.1
+      }
+    ]
+  },
+  {
+    "id": "TC-HO-07",
+    "title": "Invalid target RAT is rejected (400)",
+    "ref": "TS 23.502 4.11.1.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 2.8,
+    "metrics": null,
+    "calls": 2,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000013",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000013",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000013-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.18",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000013",
+          "targetRat": "GSM"
+        },
+        "status": 400,
+        "response": {
+          "cause": "INVALID_TARGET_RAT"
+        },
+        "ms": 1.2
+      }
+    ]
+  },
+  {
+    "id": "TC-HO-08",
+    "title": "Ping-pong stability: 50 round trips keep IP, all succeed",
+    "ref": "TS 23.502 4.11.1.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 142.9,
+    "metrics": {
+      "Handovers attempted": 100,
+      "Handover success rate": "100.0%",
+      "Avg interruption (model)": "54 ms",
+      "Max interruption (model)": "57 ms"
+    },
+    "calls": 104,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000014",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000014-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.19",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.2
+      },
+      {
+        "method": "POST",
+        "path": "/5gc/pdu-session",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "pduSessionId": 2,
+          "dnn": "ims",
+          "sst": 1
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000014",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000014-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.19",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.20",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000014",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000014",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000014-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.19",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.20",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "targetRat": "LTE"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "5GC",
+          "to": "EPC",
+          "interruptionMs": 57,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000014",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000014-2",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.19",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.20",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.5
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "targetRat": "NR"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "EPC",
+          "to": "5GC",
+          "interruptionMs": 52,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000014",
+            "core": "5GC",
+            "rat": "NR",
+            "guti": "5g-guti-000014-3",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": 1,
+                "ip": "10.50.0.19",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": 1,
+                "ip": "10.50.0.20",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "ms": 1.5
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "targetRat": "LTE"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "5GC",
+          "to": "EPC",
+          "interruptionMs": 57,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000014",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000014-4",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.19",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.20",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.2
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "targetRat": "NR"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "EPC",
+          "to": "5GC",
+          "interruptionMs": 52,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000014",
+            "core": "5GC",
+            "rat": "NR",
+            "guti": "5g-guti-000014-97",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": 1,
+                "ip": "10.50.0.19",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": 1,
+                "ip": "10.50.0.20",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "targetRat": "LTE"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "5GC",
+          "to": "EPC",
+          "interruptionMs": 57,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000014",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000014-98",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.19",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.20",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "targetRat": "NR"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "EPC",
+          "to": "5GC",
+          "interruptionMs": 52,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000014",
+            "core": "5GC",
+            "rat": "NR",
+            "guti": "5g-guti-000014-99",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": 1,
+                "ip": "10.50.0.19",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": 1,
+                "ip": "10.50.0.20",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "targetRat": "LTE"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "5GC",
+          "to": "EPC",
+          "interruptionMs": 57,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000014",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000014-100",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.19",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.20",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 3.4
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000014",
+          "targetRat": "NR"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "EPC",
+          "to": "5GC",
+          "interruptionMs": 52,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000014",
+            "core": "5GC",
+            "rat": "NR",
+            "guti": "5g-guti-000014-101",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": 1,
+                "ip": "10.50.0.19",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": 1,
+                "ip": "10.50.0.20",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "ms": 1.7
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000014",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000014",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000014-101",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.19",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.20",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.2
+      }
+    ]
+  },
+  {
+    "id": "TC-FBK-01",
+    "title": "Voice call from 5GS triggers EPS fallback with QCI 1 bearer",
+    "ref": "TS 23.502 4.13.6.1",
+    "status": "PASS",
+    "message": "",
+    "ms": 5.4,
+    "metrics": null,
+    "calls": 4,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000015",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000015",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000015-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.21",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000015",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000015",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000015-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.21",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.2
+      },
+      {
+        "method": "POST",
+        "path": "/ims/call",
+        "request": {
+          "supi": "imsi-001010000000015"
+        },
+        "status": 201,
+        "response": {
+          "epsFallback": true,
+          "ue": {
+            "supi": "imsi-001010000000015",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000015-2",
+            "inCall": true,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.21",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.22",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  },
+                  {
+                    "qi": 1,
+                    "kind": "dedicated",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000015",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000015",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000015-2",
+          "inCall": true,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.21",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": null,
+              "ip": "10.50.0.22",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "QCI"
+                },
+                {
+                  "qi": 1,
+                  "kind": "dedicated",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 6
+            }
+          ]
+        },
+        "ms": 1.1
+      }
+    ]
+  },
+  {
+    "id": "TC-FBK-02",
+    "title": "Call release removes the QCI 1 bearer",
+    "ref": "TS 23.502 4.13.6.1",
+    "status": "PASS",
+    "message": "",
+    "ms": 5.2,
+    "metrics": null,
+    "calls": 4,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000016",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000016",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000016-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.23",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.2
+      },
+      {
+        "method": "POST",
+        "path": "/ims/call",
+        "request": {
+          "supi": "imsi-001010000000016"
+        },
+        "status": 201,
+        "response": {
+          "epsFallback": true,
+          "ue": {
+            "supi": "imsi-001010000000016",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000016-2",
+            "inCall": true,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.23",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.24",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  },
+                  {
+                    "qi": 1,
+                    "kind": "dedicated",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.2
+      },
+      {
+        "method": "DELETE",
+        "path": "/ims/call/imsi-001010000000016",
+        "request": null,
+        "status": 204,
+        "response": null,
+        "ms": 1.3
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000016",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000016",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000016-2",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.23",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": null,
+              "ip": "10.50.0.24",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 6
+            }
+          ]
+        },
+        "ms": 1.2
+      }
+    ]
+  },
+  {
+    "id": "TC-FBK-03",
+    "title": "Voice call on LTE needs no fallback (VoLTE)",
+    "ref": "TS 23.502 4.13.6.1",
+    "status": "PASS",
+    "message": "",
+    "ms": 3.1,
+    "metrics": null,
+    "calls": 2,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/epc/attach",
+        "request": {
+          "supi": "imsi-001010000000017",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000017",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000017-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.25",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            }
+          ]
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "POST",
+        "path": "/ims/call",
+        "request": {
+          "supi": "imsi-001010000000017"
+        },
+        "status": 201,
+        "response": {
+          "epsFallback": false,
+          "ue": {
+            "supi": "imsi-001010000000017",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000017-1",
+            "inCall": true,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.25",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.26",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  },
+                  {
+                    "qi": 1,
+                    "kind": "dedicated",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.4
+      }
+    ]
+  },
+  {
+    "id": "TC-FBK-04",
+    "title": "Voice call for an unknown UE returns 404",
+    "ref": "TS 23.502 4.13.6.1",
+    "status": "PASS",
+    "message": "",
+    "ms": 1.4,
+    "metrics": null,
+    "calls": 1,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/ims/call",
+        "request": {
+          "supi": "imsi-001010000000018"
+        },
+        "status": 404,
+        "response": {
+          "cause": "UE_NOT_FOUND"
+        },
+        "ms": 1.3
+      }
+    ]
+  },
+  {
+    "id": "TC-FBK-05",
+    "title": "Return to 5GS after the call keeps sessions and IPs",
+    "ref": "TS 23.502 4.13.6.1",
+    "status": "PASS",
+    "message": "",
+    "ms": 8.0,
+    "metrics": null,
+    "calls": 6,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000019",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000019",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000019-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.27",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.5
+      },
+      {
+        "method": "POST",
+        "path": "/ims/call",
+        "request": {
+          "supi": "imsi-001010000000019"
+        },
+        "status": 201,
+        "response": {
+          "epsFallback": true,
+          "ue": {
+            "supi": "imsi-001010000000019",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000019-2",
+            "inCall": true,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.27",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.28",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  },
+                  {
+                    "qi": 1,
+                    "kind": "dedicated",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "DELETE",
+        "path": "/ims/call/imsi-001010000000019",
+        "request": null,
+        "status": 204,
+        "response": null,
+        "ms": 1.2
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000019",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000019",
+          "core": "EPC",
+          "rat": "LTE",
+          "guti": "4g-guti-000019-2",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": null,
+              "ip": "10.50.0.27",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 5
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": null,
+              "ip": "10.50.0.28",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "QCI"
+                }
+              ],
+              "ebi": 6
+            }
+          ]
+        },
+        "ms": 1.2
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/idle",
+        "request": {
+          "supi": "imsi-001010000000019",
+          "targetRat": "NR"
+        },
+        "status": 200,
+        "response": {
+          "result": "MOBILITY_REGISTRATION_SUCCESS",
+          "from": "EPC",
+          "to": "5GC",
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000019",
+            "core": "5GC",
+            "rat": "NR",
+            "guti": "5g-guti-000019-3",
+            "inCall": false,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": 1,
+                "ip": "10.50.0.27",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": 1,
+                "ip": "10.50.0.28",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "ms": 1.3
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000019",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000019",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000019-3",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.27",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.28",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 0.9
+      }
+    ]
+  },
+  {
+    "id": "TC-FBK-06",
+    "title": "Handover during a call keeps the QCI 1 / 5QI 1 voice flow",
+    "ref": "TS 23.501 5.17.2",
+    "status": "PASS",
+    "message": "",
+    "ms": 5.4,
+    "metrics": null,
+    "calls": 4,
+    "trace": [
+      {
+        "method": "POST",
+        "path": "/5gc/register",
+        "request": {
+          "supi": "imsi-001010000000020",
+          "plmnId": {
+            "mcc": "001",
+            "mnc": "01"
+          }
+        },
+        "status": 201,
+        "response": {
+          "supi": "imsi-001010000000020",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000020-1",
+          "inCall": false,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.29",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 1.1
+      },
+      {
+        "method": "POST",
+        "path": "/ims/call",
+        "request": {
+          "supi": "imsi-001010000000020"
+        },
+        "status": 201,
+        "response": {
+          "epsFallback": true,
+          "ue": {
+            "supi": "imsi-001010000000020",
+            "core": "EPC",
+            "rat": "LTE",
+            "guti": "4g-guti-000020-2",
+            "inCall": true,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": null,
+                "ip": "10.50.0.29",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 5
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": null,
+                "ip": "10.50.0.30",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "QCI"
+                  },
+                  {
+                    "qi": 1,
+                    "kind": "dedicated",
+                    "qiType": "QCI"
+                  }
+                ],
+                "ebi": 6
+              }
+            ]
+          }
+        },
+        "ms": 1.4
+      },
+      {
+        "method": "POST",
+        "path": "/mobility/handover",
+        "request": {
+          "supi": "imsi-001010000000020",
+          "targetRat": "NR"
+        },
+        "status": 200,
+        "response": {
+          "result": "HANDOVER_SUCCESS",
+          "from": "EPC",
+          "to": "5GC",
+          "interruptionMs": 52,
+          "transferred": [
+            1,
+            2
+          ],
+          "released": [],
+          "ue": {
+            "supi": "imsi-001010000000020",
+            "core": "5GC",
+            "rat": "NR",
+            "guti": "5g-guti-000020-3",
+            "inCall": true,
+            "sessions": [
+              {
+                "id": 1,
+                "dnn": "internet",
+                "sst": 1,
+                "ip": "10.50.0.29",
+                "flows": [
+                  {
+                    "qi": 9,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "dnn": "ims",
+                "sst": 1,
+                "ip": "10.50.0.30",
+                "flows": [
+                  {
+                    "qi": 5,
+                    "kind": "default",
+                    "qiType": "5QI"
+                  },
+                  {
+                    "qi": 1,
+                    "kind": "dedicated",
+                    "qiType": "5QI"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "ms": 1.5
+      },
+      {
+        "method": "GET",
+        "path": "/ue/imsi-001010000000020",
+        "request": null,
+        "status": 200,
+        "response": {
+          "supi": "imsi-001010000000020",
+          "core": "5GC",
+          "rat": "NR",
+          "guti": "5g-guti-000020-3",
+          "inCall": true,
+          "sessions": [
+            {
+              "id": 1,
+              "dnn": "internet",
+              "sst": 1,
+              "ip": "10.50.0.29",
+              "flows": [
+                {
+                  "qi": 9,
+                  "kind": "default",
+                  "qiType": "5QI"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "dnn": "ims",
+              "sst": 1,
+              "ip": "10.50.0.30",
+              "flows": [
+                {
+                  "qi": 5,
+                  "kind": "default",
+                  "qiType": "5QI"
+                },
+                {
+                  "qi": 1,
+                  "kind": "dedicated",
+                  "qiType": "5QI"
+                }
+              ]
+            }
+          ]
+        },
+        "ms": 0.9
+      }
+    ]
+  }
+]

@@ -1,0 +1,193 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>4G-5G Interworking Validation Report</title>
+<style>
+:root{--bg:#fff;--fg:#1c2330;--mut:#5b6678;--line:#dde2ea;--ok:#1a7f4b;--bad:#b3261e;--warn:#9a6700;--card:#f5f7fa}
+@media (prefers-color-scheme:dark){:root{--bg:#12161d;--fg:#e6eaf0;--mut:#9aa6b8;--line:#2a3240;--ok:#4cc38a;--bad:#ff7b72;--warn:#e3b341;--card:#1a2029}}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif;margin:0;padding:24px 16px}
+main{max-width:980px;margin:auto} h1{margin:0 0 4px;font-size:24px} h2{margin-top:32px;font-size:18px}
+.sub{color:var(--mut);margin:0 0 20px}.kpis{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;min-width:110px}
+.kpi b{display:block;font-size:24px}.kpi span{color:var(--mut);font-size:13px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:13px}tr.PASS td b{color:var(--ok)}tr.FAIL td b,tr.ERROR td b{color:var(--bad)}
+tr.d td{padding-top:0}summary{cursor:pointer;color:var(--mut);font-size:13px}
+pre{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:10px;overflow-x:auto;font-size:12px}
+.msg{color:var(--bad);margin:6px 0}.fault{color:var(--warn);font-weight:600}.table-wrap{overflow-x:auto}
+.note{color:var(--mut);font-size:13px}
+</style></head><body><main>
+<h1>4G-5G Interworking Validation Report</h1>
+<p class="sub">Target: http://127.0.0.1:43521 &middot; 2026-10-14 10:56:52 &middot; simulated network unless a real target was given</p>
+<p class='fault'>Fault injected: n26_down</p><div class="kpis"><div class="kpi"><b>21</b><span>test cases</span></div><div class="kpi"><b style="color:var(--ok)">9</b><span>passed</span></div><div class="kpi"><b style="color:var(--bad)">12</b><span>failed / error</span></div>
+<div class="kpi"><b>43%</b><span>pass rate</span></div></div>
+<h2>Results</h2><div class="table-wrap"><table>
+<tr><th>ID</th><th>Test case</th><th>3GPP reference</th><th>Result</th></tr><tr class='PASS'><td>TC-BASE-01</td><td>4G attach creates default bearer (QCI 9) and IP</td><td>TS 23.401 5.3.2</td><td><b>PASS</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><pre>POST /epc/attach  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000001&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000001&quot;, &quot;core&quot;: &quot;EPC&quot;, &quot;rat&quot;: &quot;LTE&quot;, &quot;guti&quot;: &quot;4g-guti-000001-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: null, &quot;ip&quot;: &quot;10.50.0.3&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;QCI&quot;}], &quot;ebi&quot;: 5}]}
+GET /ue/imsi-001010000000001  -&gt;  200
+  request : null
+  response: {&quot;supi&quot;: &quot;imsi-001010000000001&quot;, &quot;core&quot;: &quot;EPC&quot;, &quot;rat&quot;: &quot;LTE&quot;, &quot;guti&quot;: &quot;4g-guti-000001-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: null, &quot;ip&quot;: &quot;10.50.0.3&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;QCI&quot;}], &quot;ebi&quot;: 5}]}</pre></details></td></tr><tr class='PASS'><td>TC-BASE-02</td><td>5G registration creates default PDU session (5QI 9) and IP</td><td>TS 23.502 4.2.2.2.2</td><td><b>PASS</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000002&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000002&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000002-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.4&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+GET /ue/imsi-001010000000002  -&gt;  200
+  request : null
+  response: {&quot;supi&quot;: &quot;imsi-001010000000002&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000002-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.4&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}</pre></details></td></tr><tr class='PASS'><td>TC-BASE-03</td><td>Barred subscriber is rejected on 4G attach</td><td>TS 23.401 5.3.2</td><td><b>PASS</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><pre>POST /epc/attach  -&gt;  403
+  request : {&quot;supi&quot;: &quot;imsi-001019999999999&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;cause&quot;: &quot;AUTHENTICATION_FAILURE&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-IDL-01</td><td>5GS to EPS idle move (TAU) keeps IP and sessions</td><td>TS 23.502 4.11.1.3</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>status: expected 200, got 403</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000003&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000003&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000003-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.5&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /5gc/pdu-session  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000003&quot;, &quot;pduSessionId&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000003&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000003-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.5&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}, {&quot;id&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.6&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 5, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+GET /ue/imsi-001010000000003  -&gt;  200
+  request : null
+  response: {&quot;supi&quot;: &quot;imsi-001010000000003&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000003-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.5&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}, {&quot;id&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.6&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 5, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /mobility/idle  -&gt;  403
+  request : {&quot;supi&quot;: &quot;imsi-001010000000003&quot;, &quot;targetRat&quot;: &quot;LTE&quot;}
+  response: {&quot;cause&quot;: &quot;UE_CONTEXT_NOT_FOUND_AT_OLD_CORE&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-IDL-02</td><td>EPS to 5GS idle move (mobility registration) keeps IP</td><td>TS 23.502 4.11.1.3</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>status: expected 200, got 403</p><pre>POST /epc/attach  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000004&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000004&quot;, &quot;core&quot;: &quot;EPC&quot;, &quot;rat&quot;: &quot;LTE&quot;, &quot;guti&quot;: &quot;4g-guti-000004-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: null, &quot;ip&quot;: &quot;10.50.0.7&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;QCI&quot;}], &quot;ebi&quot;: 5}]}
+GET /ue/imsi-001010000000004  -&gt;  200
+  request : null
+  response: {&quot;supi&quot;: &quot;imsi-001010000000004&quot;, &quot;core&quot;: &quot;EPC&quot;, &quot;rat&quot;: &quot;LTE&quot;, &quot;guti&quot;: &quot;4g-guti-000004-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: null, &quot;ip&quot;: &quot;10.50.0.7&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;QCI&quot;}], &quot;ebi&quot;: 5}]}
+POST /mobility/idle  -&gt;  403
+  request : {&quot;supi&quot;: &quot;imsi-001010000000004&quot;, &quot;targetRat&quot;: &quot;NR&quot;}
+  response: {&quot;cause&quot;: &quot;UE_CONTEXT_NOT_FOUND_AT_OLD_CORE&quot;}</pre></details></td></tr><tr class='PASS'><td>TC-IDL-03</td><td>Idle move for an unknown UE returns 404</td><td>TS 23.502 4.11.1.3</td><td><b>PASS</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><pre>POST /mobility/idle  -&gt;  404
+  request : {&quot;supi&quot;: &quot;imsi-001010000000005&quot;, &quot;targetRat&quot;: &quot;LTE&quot;}
+  response: {&quot;cause&quot;: &quot;UE_NOT_FOUND&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-IDL-04</td><td>Slice-specific session is released when moving to EPS</td><td>TS 23.502 4.11.1.3</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>status: expected 200, got 403</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000006&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000006&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000006-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.8&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /5gc/pdu-session  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000006&quot;, &quot;pduSessionId&quot;: 3, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 2}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000006&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000006-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.8&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}, {&quot;id&quot;: 3, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 2, &quot;ip&quot;: &quot;10.50.0.9&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /mobility/idle  -&gt;  403
+  request : {&quot;supi&quot;: &quot;imsi-001010000000006&quot;, &quot;targetRat&quot;: &quot;LTE&quot;}
+  response: {&quot;cause&quot;: &quot;UE_CONTEXT_NOT_FOUND_AT_OLD_CORE&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-HO-01</td><td>5GS to EPS handover preserves IP and maps 5QI 9 to QCI 9</td><td>TS 23.502 4.11.1.2</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>status: expected 200, got 500</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000007&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000007&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000007-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.10&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+GET /ue/imsi-001010000000007  -&gt;  200
+  request : null
+  response: {&quot;supi&quot;: &quot;imsi-001010000000007&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000007-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.10&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /mobility/handover  -&gt;  500
+  request : {&quot;supi&quot;: &quot;imsi-001010000000007&quot;, &quot;targetRat&quot;: &quot;LTE&quot;}
+  response: {&quot;cause&quot;: &quot;N26_CONTEXT_TRANSFER_FAILURE&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-HO-02</td><td>EPS to 5GS handover preserves IP and maps QCI 9 to 5QI 9</td><td>TS 23.502 4.11.1.2</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>status: expected 200, got 500</p><pre>POST /epc/attach  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000008&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000008&quot;, &quot;core&quot;: &quot;EPC&quot;, &quot;rat&quot;: &quot;LTE&quot;, &quot;guti&quot;: &quot;4g-guti-000008-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: null, &quot;ip&quot;: &quot;10.50.0.11&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;QCI&quot;}], &quot;ebi&quot;: 5}]}
+GET /ue/imsi-001010000000008  -&gt;  200
+  request : null
+  response: {&quot;supi&quot;: &quot;imsi-001010000000008&quot;, &quot;core&quot;: &quot;EPC&quot;, &quot;rat&quot;: &quot;LTE&quot;, &quot;guti&quot;: &quot;4g-guti-000008-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: null, &quot;ip&quot;: &quot;10.50.0.11&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;QCI&quot;}], &quot;ebi&quot;: 5}]}
+POST /mobility/handover  -&gt;  500
+  request : {&quot;supi&quot;: &quot;imsi-001010000000008&quot;, &quot;targetRat&quot;: &quot;NR&quot;}
+  response: {&quot;cause&quot;: &quot;N26_CONTEXT_TRANSFER_FAILURE&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-HO-03</td><td>IMS session keeps its QoS (5QI 5 &lt;-&gt; QCI 5) across handover</td><td>TS 23.501 5.17.2</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>to EPS: expected 200, got 500</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000009&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000009&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000009-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.12&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /5gc/pdu-session  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000009&quot;, &quot;pduSessionId&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000009&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000009-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.12&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}, {&quot;id&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.13&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 5, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /mobility/handover  -&gt;  500
+  request : {&quot;supi&quot;: &quot;imsi-001010000000009&quot;, &quot;targetRat&quot;: &quot;LTE&quot;}
+  response: {&quot;cause&quot;: &quot;N26_CONTEXT_TRANSFER_FAILURE&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-HO-04</td><td>Handover transfers internet and IMS sessions, releases slice session</td><td>TS 23.502 4.11.1.2</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>status: expected 200, got 500</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000010&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000010&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000010-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.14&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /5gc/pdu-session  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000010&quot;, &quot;pduSessionId&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000010&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000010-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.14&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}, {&quot;id&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.15&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 5, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /5gc/pdu-session  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000010&quot;, &quot;pduSessionId&quot;: 3, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 2}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000010&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000010-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.14&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}, {&quot;id&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.15&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 5, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}, {&quot;id&quot;: 3, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 2, &quot;ip&quot;: &quot;10.50.0.16&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /mobility/handover  -&gt;  500
+  request : {&quot;supi&quot;: &quot;imsi-001010000000010&quot;, &quot;targetRat&quot;: &quot;LTE&quot;}
+  response: {&quot;cause&quot;: &quot;N26_CONTEXT_TRANSFER_FAILURE&quot;}</pre></details></td></tr><tr class='PASS'><td>TC-HO-05</td><td>Handover to the current RAT is rejected (409)</td><td>TS 23.502 4.11.1.2</td><td><b>PASS</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000011&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000011&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000011-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.17&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /mobility/handover  -&gt;  409
+  request : {&quot;supi&quot;: &quot;imsi-001010000000011&quot;, &quot;targetRat&quot;: &quot;NR&quot;}
+  response: {&quot;cause&quot;: &quot;ALREADY_ON_TARGET_RAT&quot;}</pre></details></td></tr><tr class='PASS'><td>TC-HO-06</td><td>Handover for an unknown UE returns 404</td><td>TS 23.502 4.11.1.2</td><td><b>PASS</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><pre>POST /mobility/handover  -&gt;  404
+  request : {&quot;supi&quot;: &quot;imsi-001010000000012&quot;, &quot;targetRat&quot;: &quot;LTE&quot;}
+  response: {&quot;cause&quot;: &quot;UE_NOT_FOUND&quot;}</pre></details></td></tr><tr class='PASS'><td>TC-HO-07</td><td>Invalid target RAT is rejected (400)</td><td>TS 23.502 4.11.1.2</td><td><b>PASS</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000013&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000013&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000013-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.18&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /mobility/handover  -&gt;  400
+  request : {&quot;supi&quot;: &quot;imsi-001010000000013&quot;, &quot;targetRat&quot;: &quot;GSM&quot;}
+  response: {&quot;cause&quot;: &quot;INVALID_TARGET_RAT&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-HO-08</td><td>Ping-pong stability: 50 round trips keep IP, all succeed</td><td>TS 23.502 4.11.1.2</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>cycle 1 to LTE: expected 200, got 500</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000014&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000014&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000014-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.19&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /5gc/pdu-session  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000014&quot;, &quot;pduSessionId&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000014&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000014-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.19&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}, {&quot;id&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.20&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 5, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+GET /ue/imsi-001010000000014  -&gt;  200
+  request : null
+  response: {&quot;supi&quot;: &quot;imsi-001010000000014&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000014-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.19&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}, {&quot;id&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.20&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 5, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /mobility/handover  -&gt;  500
+  request : {&quot;supi&quot;: &quot;imsi-001010000000014&quot;, &quot;targetRat&quot;: &quot;LTE&quot;}
+  response: {&quot;cause&quot;: &quot;N26_CONTEXT_TRANSFER_FAILURE&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-FBK-01</td><td>Voice call from 5GS triggers EPS fallback with QCI 1 bearer</td><td>TS 23.502 4.13.6.1</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>status: expected 201, got 500</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000015&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000015&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000015-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.21&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+GET /ue/imsi-001010000000015  -&gt;  200
+  request : null
+  response: {&quot;supi&quot;: &quot;imsi-001010000000015&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000015-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.21&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /ims/call  -&gt;  500
+  request : {&quot;supi&quot;: &quot;imsi-001010000000015&quot;}
+  response: {&quot;cause&quot;: &quot;EPS_FALLBACK_FAILURE&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-FBK-02</td><td>Call release removes the QCI 1 bearer</td><td>TS 23.502 4.13.6.1</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>call setup: expected 201, got 500</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000016&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000016&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000016-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.22&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /ims/call  -&gt;  500
+  request : {&quot;supi&quot;: &quot;imsi-001010000000016&quot;}
+  response: {&quot;cause&quot;: &quot;EPS_FALLBACK_FAILURE&quot;}</pre></details></td></tr><tr class='PASS'><td>TC-FBK-03</td><td>Voice call on LTE needs no fallback (VoLTE)</td><td>TS 23.502 4.13.6.1</td><td><b>PASS</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><pre>POST /epc/attach  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000017&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000017&quot;, &quot;core&quot;: &quot;EPC&quot;, &quot;rat&quot;: &quot;LTE&quot;, &quot;guti&quot;: &quot;4g-guti-000017-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: null, &quot;ip&quot;: &quot;10.50.0.23&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;QCI&quot;}], &quot;ebi&quot;: 5}]}
+POST /ims/call  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000017&quot;}
+  response: {&quot;epsFallback&quot;: false, &quot;ue&quot;: {&quot;supi&quot;: &quot;imsi-001010000000017&quot;, &quot;core&quot;: &quot;EPC&quot;, &quot;rat&quot;: &quot;LTE&quot;, &quot;guti&quot;: &quot;4g-guti-000017-1&quot;, &quot;inCall&quot;: true, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: null, &quot;ip&quot;: &quot;10.50.0.23&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;QCI&quot;}], &quot;ebi&quot;: 5}, {&quot;id&quot;: 2, &quot;dnn&quot;: &quot;ims&quot;, &quot;sst&quot;: null, &quot;ip&quot;: &quot;10.50.0.24&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 5, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;QCI&quot;}, {&quot;qi&quot;: 1, &quot;kind&quot;: &quot;dedicated&quot;, &quot;qiType&quot;: &quot;QCI&quot;}], &quot;ebi&quot;: 6}]}}</pre></details></td></tr><tr class='PASS'><td>TC-FBK-04</td><td>Voice call for an unknown UE returns 404</td><td>TS 23.502 4.13.6.1</td><td><b>PASS</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><pre>POST /ims/call  -&gt;  404
+  request : {&quot;supi&quot;: &quot;imsi-001010000000018&quot;}
+  response: {&quot;cause&quot;: &quot;UE_NOT_FOUND&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-FBK-05</td><td>Return to 5GS after the call keeps sessions and IPs</td><td>TS 23.502 4.13.6.1</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>call setup: expected 201, got 500</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000019&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000019&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000019-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.25&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /ims/call  -&gt;  500
+  request : {&quot;supi&quot;: &quot;imsi-001010000000019&quot;}
+  response: {&quot;cause&quot;: &quot;EPS_FALLBACK_FAILURE&quot;}</pre></details></td></tr><tr class='FAIL'><td>TC-FBK-06</td><td>Handover during a call keeps the QCI 1 / 5QI 1 voice flow</td><td>TS 23.501 5.17.2</td><td><b>FAIL</b></td></tr><tr class='d'><td colspan='4'><details><summary>Message trace</summary><p class='msg'>call setup: expected 201, got 500</p><pre>POST /5gc/register  -&gt;  201
+  request : {&quot;supi&quot;: &quot;imsi-001010000000020&quot;, &quot;plmnId&quot;: {&quot;mcc&quot;: &quot;001&quot;, &quot;mnc&quot;: &quot;01&quot;}}
+  response: {&quot;supi&quot;: &quot;imsi-001010000000020&quot;, &quot;core&quot;: &quot;5GC&quot;, &quot;rat&quot;: &quot;NR&quot;, &quot;guti&quot;: &quot;5g-guti-000020-1&quot;, &quot;inCall&quot;: false, &quot;sessions&quot;: [{&quot;id&quot;: 1, &quot;dnn&quot;: &quot;internet&quot;, &quot;sst&quot;: 1, &quot;ip&quot;: &quot;10.50.0.26&quot;, &quot;flows&quot;: [{&quot;qi&quot;: 9, &quot;kind&quot;: &quot;default&quot;, &quot;qiType&quot;: &quot;5QI&quot;}]}]}
+POST /ims/call  -&gt;  500
+  request : {&quot;supi&quot;: &quot;imsi-001010000000020&quot;}
+  response: {&quot;cause&quot;: &quot;EPS_FALLBACK_FAILURE&quot;}</pre></details></td></tr></table></div>
+<h2>Core log analysis (Log Tracker)</h2><pre>CORE TEST LOG SUMMARY
+========================================
+Total log lines : 37
+Failure lines   : 13
+Invalid IMSIs   : 0
+PLMNs seen      : MCC 001 / MNC 01
+
+Failures by node:
+  AMF    9
+  MME    3
+  HSS    1
+
+Failures by event:
+  HANDOVER_FAILURE       5
+  EPS_FALLBACK_FAILURE   4
+  TAU_REJECT             2
+  AUTH_FAILURE           1
+  REGISTRATION_REJECT    1
+
+Top IMSIs by failure count:
+  001019999999999  1
+  001010000000003  1
+  001010000000004  1
+  001010000000006  1
+  001010000000007  1
+
+Failure detail:
+  2026-10-14 10:56:52 [ERROR] HSS AUTH_FAILURE IMSI=001019999999999 MCC=001 MNC=01 authentication rejected
+  2026-10-14 10:56:52 [ERROR] MME TAU_REJECT IMSI=001010000000003 MCC=001 MNC=01 UE context not retrievable from old core
+  2026-10-14 10:56:52 [ERROR] AMF REGISTRATION_REJECT IMSI=001010000000004 MCC=001 MNC=01 UE context not retrievable from old core
+  2026-10-14 10:56:52 [ERROR] MME TAU_REJECT IMSI=001010000000006 MCC=001 MNC=01 UE context not retrievable from old core
+  2026-10-14 10:56:52 [ERROR] AMF HANDOVER_FAILURE IMSI=001010000000007 MCC=001 MNC=01 N26 context transfer timeout
+  2026-10-14 10:56:52 [ERROR] MME HANDOVER_FAILURE IMSI=001010000000008 MCC=001 MNC=01 N26 context transfer timeout
+  2026-10-14 10:56:52 [ERROR] AMF HANDOVER_FAILURE IMSI=001010000000009 MCC=001 MNC=01 N26 context transfer timeout
+  2026-10-14 10:56:52 [ERROR] AMF HANDOVER_FAILURE IMSI=001010000000010 MCC=001 MNC=01 N26 context transfer timeout
+  2026-10-14 10:56:52 [ERROR] AMF HANDOVER_FAILURE IMSI=001010000000014 MCC=001 MNC=01 N26 context transfer timeout
+  2026-10-14 10:56:52 [ERROR] AMF EPS_FALLBACK_FAILURE IMSI=001010000000015 MCC=001 MNC=01 N26 context transfer timeout
+  2026-10-14 10:56:52 [ERROR] AMF EPS_FALLBACK_FAILURE IMSI=001010000000016 MCC=001 MNC=01 N26 context transfer timeout
+  2026-10-14 10:56:52 [ERROR] AMF EPS_FALLBACK_FAILURE IMSI=001010000000019 MCC=001 MNC=01 N26 context transfer timeout
+  2026-10-14 10:56:52 [ERROR] AMF EPS_FALLBACK_FAILURE IMSI=001010000000020 MCC=001 MNC=01 N26 context transfer timeout
+</pre></main></body></html>

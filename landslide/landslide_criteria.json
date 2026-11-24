@@ -1,0 +1,5 @@
+{
+  "min_success_rate_pct": 99.0,
+  "max_avg_time_ms": 100,
+  "max_p95_time_ms": 150
+}

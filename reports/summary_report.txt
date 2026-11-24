@@ -1,0 +1,18 @@
+CORE TEST LOG SUMMARY
+========================================
+Total log lines : 145
+Failure lines   : 1
+Invalid IMSIs   : 0
+PLMNs seen      : MCC 001 / MNC 01
+
+Failures by node:
+  HSS    1
+
+Failures by event:
+  AUTH_FAILURE           1
+
+Top IMSIs by failure count:
+  001019999999999  1
+
+Failure detail:
+  2026-10-15 04:58:12 [ERROR] HSS AUTH_FAILURE IMSI=001019999999999 MCC=001 MNC=01 authentication rejected
